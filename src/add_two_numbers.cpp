@@ -33,16 +33,13 @@ ListNode* addTwoNumbers(ListNode *l1, ListNode *l2) {
       head = tmp;
       cur = tmp;
     }
-    
   }
-	
   return head;  
 }
 
 ListNode* buildList(){
   return nullptr;
 }
-
 
 template<typename... Types>
 ListNode* buildList(long long first, Types... items){
