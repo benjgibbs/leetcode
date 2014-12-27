@@ -3,14 +3,14 @@ CXXFLAGS=--std=c++11
 CPPS=$(wildcard src/*.cpp)
 BINS=$(patsubst src/%.cpp,bin/%,$(CPPS))
 
-.DEFAULT_GOAL:=all
-
-$(BINS) : $(patsubst bin/%,.src/%.cpp,$@)
-	@echo "Compiling to $@."
-	$(CC) $(CXXFLAGS) $(patsubst bin/%,src/%.cpp,$@)  -o $@
-
 all : $(BINS)
-	@echo $(BINS)
+
+#Using a static pattern rule
+$(BINS) : bin/% : src/%.cpp
+	$(CC) $(CXXFLAGS) $< -o $@
+
+bindir: 
+	mkdir bin
 
 clean : 
 	rm $(BINS)
