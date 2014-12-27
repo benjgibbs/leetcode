@@ -12,9 +12,5 @@ $(BINS) : $(patsubst bin/%,.src/%.cpp,$@)
 all : $(BINS)
 	@echo $(BINS)
 
-echo :
-	@echo $(BINS)
-
-	
 clean : 
 	rm $(BINS)
