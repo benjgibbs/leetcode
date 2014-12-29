@@ -6,11 +6,9 @@ BINS=$(patsubst src/%.cpp,bin/%,$(CPPS))
 all : $(BINS)
 
 #Using a static pattern rule
-$(BINS) : bin/% : src/%.cpp
+$(BINS) : bin/%  :  src/%.cpp
+	if [ ! -d bin ]; then mkdir bin; fi
 	$(CC) $(CXXFLAGS) $< -o $@
-
-bindir: 
-	mkdir bin
 
 clean : 
 	rm $(BINS)
