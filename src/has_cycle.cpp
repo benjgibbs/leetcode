@@ -9,15 +9,16 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+
+// Floyd's cycle finding algorithm
 bool hasCycle(ListNode *head) {
-	std::unordered_set<ListNode*> s;
-	bool result = false;
-	while(head && !result) {
-		if(s.count(head)) result = true;
-		s.insert(head);
-		head = head->next;
+	ListNode* slow = head, * fast = head;
+	while(slow != nullptr && fast != nullptr && fast->next != nullptr) {
+		slow = slow->next;
+		fast = fast->next->next;
+		if(slow == fast) return true;
 	}
-	return result;
+	return false;
 }
 
 int main(int argc, char** argv) {
