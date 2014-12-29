@@ -1,40 +1,39 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
-
-
 vector<int> parts(string s) {
 	vector<int> result;
-	while(s.find(".") != s.end()) {
-		
-	}
-	int loc1 = version1.find(".");
-	int v11 = atoi(version1.substr(0,loc1).c_str());
-	int v12 = atoi(version1.substr(loc1+1).c_str());
+	do{
+		string n = s.substr(0,s.find("."));
+		result.push_back(atoi(n.c_str()));	
+		int end = s.find(".");
+		if(end == -1) {
+			end = s.length();
+		} else {
+			end++;
+		}
+		s = s.substr(end);
+	} while(!s.empty());
 	return result;
 }
-
-
 
 //If version1 > version2 return 1, if version1 < version2 return -1, otherwise return 0.
 int compareVersion(string version1, string version2) {
 	if(version1 == version2) return 0;
 	
-	int loc1 = version1.find(".");
-	int v11 = atoi(version1.substr(0,loc1).c_str());
-	int v12 = atoi(version1.substr(loc1+1).c_str());
-	
-	int loc2 = version2.find(".");
-	int v21 = atoi(version2.substr(0,loc2).c_str());
-	int v22 = atoi(version2.substr(loc2+1).c_str());
-	
-	if(v11 > v21) return 1;
-	if(v11 < v21) return -1;
-	if(v12 > v22) return 1;
-	if(v12 < v22)	return -1;	
+	vector<int> parts1 = parts(version1);	
+	vector<int> parts2 = parts(version2);	
+	int max = std::max(parts1.size(), parts2.size());
+	for(int i = 0; i < max; i++){
+		int p1 = parts1.size() > i ? parts1[i] : 0;
+		int p2 = parts2.size() > i ? parts2[i] : 0;
+		if(p1 > p2) return 1;
+		if(p1 < p2) return -1;
+	}
 	return 0;
 }
 
@@ -46,5 +45,5 @@ int main(int argc, char** argv){
 	std::cout << "v1 < v2: " << compareVersion(v1,v2) << std::endl;	
 	std::cout << "v2 < v3: " << compareVersion(v2,v3) << std::endl;	
 	std::cout << "v3 < v4: " << compareVersion(v2,v4) << std::endl;	
-	
+	std::cout << "1 < 1.1: " << compareVersion("1", "1.1") << std::endl;	
 }
