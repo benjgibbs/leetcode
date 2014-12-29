@@ -1,8 +1,6 @@
 #include <iostream>
 #include <unordered_set>
 
-
-
 struct ListNode {
     int val;
     ListNode *next;
@@ -33,5 +31,4 @@ int main(int argc, char** argv) {
 
 	std::cout << "Has Cycle: " << hasCycle(nocycle) << std::endl;
 	std::cout << "Has Cycle: " << hasCycle(cycle) << std::endl;
-
 }
